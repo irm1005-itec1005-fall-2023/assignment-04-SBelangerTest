@@ -1,56 +1,173 @@
-/*
- * CSS File for the solution
- * Assignment 03
- * You can modify these styles but you don't have to
- */
+<!DOCTYPE HTML>
+<html>
 
-/*
- VARIABLES
-*/
-:root {
-  /* Core colours */
-  /* https://coolors.co/palette/e63946-f1faee-a8dadc-457b9d-1d3557 */
-  --colour-amaranth: #e63946;
-  --colour-peppermint: #f1faee;
-  --colour-aquaisland: #a8dadc;
-  --colour-wedgewood: #457b9d;
-  --colour-cello: #1d3557;
+<style data-el-id="custom-fonts">
+  <style>
+    @font-face {
+      font-family: HelveticaforTargetBold Bold;
+      src: url('https://assets.zyrosite.com/Awvj02qMEDtplgnb/HelveticaforTargetBold Bold.woff2') format('woff2');
+      font-display: swap;
+    }
 
-  /* Header configuration */
-  --header-heading-colour: var(--colour-peppermint);
+    body {
+      font-family: HelveticaforTarget-Bold, sans-serif;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      width: 100%;
+      background-color: #3a3837;
+      margin: 0;
+      padding: 0;
+    }
 
-  /* Body configuration */
-  --body-default-colour: var(--colour-cello);
-  --body-background-colour: var(--colour-peppermint);
-}
+    header {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      align-items: center;
+      font-size: 2rem;
+      margin: 1rem;
+      margin-top: 2rem;
+      display: grid;
+      text-align: center;
+      grid-template-columns: 1fr 1fr 2fr 1fr 1fr;
+      border-radius: 4rem;
+      box-shadow: 0px 0px 1rem 0px rgb(0, 0, 0);
+    }
 
-/*
-  PAGE / BODY
-*/
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  color: var(--body-default-colour);
-  background-color: var(--body-background-colour);
-}
+    img {
+      text-align: center;
+      display: grid;
+      width: 40%;
+      margin: 3rem;
+      grid-column: 1 / span 1;
+    }
 
-main {
-  min-height: 100vh;
+    h1 {
+      color: rgb(0, 0, 0);
+      align-items: center;
+      font-size: 2rem;
+      margin: 1rem;
+      grid-column: 2;
+    }
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+    h2 {
+      color: black;
+      display: grid;
+      text-align: center;
+      justify-content: space-between;
+      font-size: 1rem;
+      align-items: center;
+      grid-column: 4;
+    }
 
+    #app {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      align-items: center;
+      font-size: 2rem;
+      margin: 1rem;
+      margin-top: 2rem;
+      padding: 2%;
+      display: grid;
+      text-align: center;
+      grid-template-columns: 0.05fr 6fr 0.05fr;
+      grid-template-rows: auto;
+      border-radius: 3rem;
+      box-shadow: 0px 0px 1rem 0px rgb(0, 0, 0);
+    }
 
-/****** Screen reader text utility clsas *******/
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
-}
+    input[type="text"] {
+      width: 70%;
+      padding: 0.5rem;
+      margin-left: 4rem;
+      display: grid;
+      align-items: center;
+      box-sizing: border-box;
+      border-bottom-color: rgb(255, 60, 0);
+      border-top-color: white;
+      border-left-color: white;
+      border-right-color: white;
+      border-style: dotted;
+      grid-column: 2 / span 2;
+    }
+
+    .addTaskButton,
+    [id^="complete-button"] {
+      background-color: #ff3006;
+      color: #ffffff;
+      font-size: 1.8rem;
+      border: none;
+      box-shadow: 0px 0px 0.5rem 0px rgba(0, 0, 0, 0.5);
+      align-items: center;
+      border-radius: 50%;
+      margin-left: 3rem;
+      display: grid;
+      padding: 1rem;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    #removeTask {
+      padding: 0.2rem;
+      background-color: #ffffff;
+      color: #ff3006;
+      font-size: 1.66rem;
+      border-color: black;
+      box-shadow: 0px 0px 0.5rem 0px rgb(118, 118, 118);
+      align-items: right;
+      width: 2.6rem;
+      border-radius: 25px;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 1rem;
+      width: max-content;
+      margin-left: -3rem;
+      font-size: 1rem;
+      text-align: left;
+      align-items: left;
+    }
+
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      box-shadow: 0px 0px 0.5rem 0px rgba(0, 0, 0, 0.5);
+      margin-right: 0.5rem;
+    }
+
+    [id^="complete-button"] {
+      padding: 0.2rem;
+      background-color: #ffffff;
+      color: #0a9528;
+      font-size: 1.66rem;
+      border-color: black;
+      box-shadow: 0px 0px 0.5rem 0px rgb(118, 118, 118);
+      align-items: center;
+      margin-left: 7rem;
+      border-radius: 25px;
+      display: grid;
+      grid-column-start: 3;
+      grid-row-start: 2;
+    }
+
+    .completedList {
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      align-items: center;
+      font-size: 2rem;
+      margin: 1rem;
+      margin-top: 2rem;
+      padding: 3%;
+      display: grid;
+      text-align: center;
+      grid-template-columns: 1fr 6fr 1fr;
+      grid-row-start: 1;
+      grid-template-rows: auto;
+      border-radius: 3rem;
+      box-shadow: 0px 0px 1rem 0px rgb(0, 0, 0);
+    }
+  </style>
+</html>
