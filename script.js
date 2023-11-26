@@ -1,88 +1,97 @@
-/* Assignment 03: Starting a Todo List App
-*
-* You are going to build the brains of a simple Todo List application
-* in JavaScript. You don't have to worry about the look of the app for now.
-* We will make it look awesome in Assignment 04.
-*
-* For now, we'll focus on giving the application the following features:
-* 1. Add a new todo item
-* 2. Delete a todo item
-* 3. Mark a todo item as completed
-* 4. Delete a todo item
-* 5. Clear all completed todos
-*
-* The following code is the starting point for this assignment.
-*
-* You will have to write the code to initialise the todoItems array and
-* for the functions below.
-*
-* 1. addToDoItem(text)
-* 2. removeToDoItem(todoId)
-* 3. markToDoItemAsCompleted(todoId)
-* 4. deleteToDoItem(todoId)
-* 5. clearCompletedTasks()
-*
-* YOU MUST NOT CHANGE ANY OF THE FUNCTION NAMES OR THE AUTOMATED TESTS WILL FAIL
-*
-* As you write each function, press on the "Run Tests" button in the browser
-* to run the automated tests and check your work.
-*
-* You can also add your own tests and debug statements at the bottom of this file.
-*
-*/
-
-// Data storage - Initialize the array of To Do items
-let todoItems = [];
-
-// Function to add a todo to the list
-function addToDoItem(item) {
-  const newTodo = {
-    id: todoItems.length,
-    text: item,
-    completed: false,
-  };
-  todoItems.push(newTodo);
-}
-
-// Function to remove a todo from the list
-function removeToDoItem(item) {
-  todoItems = todoItems.filter(todo => todo.id !== item);
-}
-
-// Function to mark a task as completed
-function markToDoItemAsCompleted(item) {
-  const todoItem = todoItems.find(todo => todo.id === item);
-  if (todoItem) {
-    todoItem.completed = true;
+function addTask() {
+    const taskInput = document.getElementById('taskInput');
+    const taskList = document.getElementById('taskList');
+  
+    if (taskInput.value.trim() !== '') {
+      const li = document.createElement('li');
+      li.classList.add('task-item');
+  
+      // Create grid container
+      const gridContainer = document.createElement('div');
+      gridContainer.style.display = 'grid';
+      gridContainer.style.gridTemplateColumns = '3fr 97fr 0.05fr'; // Three columns: checkbox, task text, remove button
+  
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.addEventListener('change', completeTask);
+  
+      const taskText = document.createElement('span');
+      taskText.textContent = taskInput.value;
+  
+      const removeButton = document.createElement('button');
+      removeButton.textContent = '×';
+      removeButton.classList.add('removeButton');
+      removeButton.addEventListener('click', removeTask);
+  
+      // Append elements to the grid container
+      gridContainer.appendChild(checkbox);
+      gridContainer.appendChild(taskText);
+      gridContainer.appendChild(removeButton);
+  
+      li.appendChild(gridContainer);
+  
+      taskList.appendChild(li);
+      taskInput.value = '';
+    }
   }
-}
-
-// Function to delete a task from the array
-function deleteToDoItem(todoId) {
-  todoItems = todoItems.filter(todo => todo.id !== todoId);
-}
-
-// Function to clear all completed tasks
-function clearCompletedTasks() {
-  todoItems = todoItems.filter(todo => !todo.completed);
-}
-
-
-
-// You can write your own tests here if you would like to test your code
-// For example:
-// addToDoItem("Test ToDo");
-// console.log(todoItems);
-// removeToDoItem(0);
-// console.log(todoItems);
-// markToDoItemAsCompleted(1);
-// console.log(todoItems);
-// deleteToDoItem(1);
-// console.log(todoItems);
-// clearCompletedTasks();
-// console.log(todoItems);
-// Initialize the array of To Do items
-// Initialize the array of To Do items
-
-console.log(todoItems);
-
+  
+  function completeTask() {
+    const taskList = document.getElementById('taskList');
+    const completedList = document.getElementById('completedList');
+  
+    const taskItem = this.parentNode.parentNode;
+    taskItem.classList.toggle('completed');
+  
+    if (taskItem.classList.contains('completed')) {
+      const completedLi = document.createElement('li');
+      completedLi.classList.add('task-item');
+  
+      // Create grid container
+      const gridContainer = document.createElement('div');
+      gridContainer.style.display = 'grid';
+      gridContainer.style.gridTemplateColumns = '3fr 97fr 0.05fr'; // Three columns: checkbox, task text, remove button
+  
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.checked = true; // The checkbox is checked for completed tasks
+      checkbox.addEventListener('change', completeTask);
+  
+      const taskText = document.createElement('span');
+      taskText.textContent = taskItem.querySelector('span').textContent; // Copy task text
+  
+      const removeButton = document.createElement('button');
+      removeButton.textContent = '×'; // '×' as the text content
+      removeButton.classList.add('removeButton');
+      removeButton.addEventListener('click', removeTask);
+  
+      // Append elements to the grid container
+      gridContainer.appendChild(checkbox);
+      gridContainer.appendChild(taskText);
+      gridContainer.appendChild(removeButton);
+  
+      completedLi.appendChild(gridContainer);
+  
+      completedList.appendChild(completedLi);
+      taskList.removeChild(taskItem); // Remove task from taskList
+    } else {
+      taskList.removeChild(taskItem); // Remove task from taskList
+    }
+  }
+  
+  function removeTask() {
+    const taskList = document.getElementById('taskList');
+    const completedList = document.getElementById('completedList');
+    const taskItem = this.parentNode.parentNode;
+  
+    if (taskItem.parentNode === completedList) {
+      completedList.removeChild(taskItem);
+    } else {
+      taskList.removeChild(taskItem);
+    }
+  }
+  
+  function removeCompletedTasks() {
+    const completedList = document.getElementById('completedList');
+    completedList.innerHTML = '';
+  }
+  
